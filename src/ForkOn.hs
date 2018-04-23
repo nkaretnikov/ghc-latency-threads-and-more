@@ -40,12 +40,12 @@ showUS x = round ((1000 :: Double) * 1000 * realToFrac x)-- }}}
 
 runClient :: IO ()-- {{{
 runClient = do
-    traceMarkerIO "Clinet: getting server address"
+    traceMarkerIO "Client: getting server address"
     serverAddr <- head <$> getAddrInfo Nothing (Just "127.0.0.1") (Just "4242")
     sock <- socket (addrFamily serverAddr) Stream defaultProtocol
-    traceMarkerIO "Clinet: connecting to server"
+    traceMarkerIO "Client: connecting to server"
     connect sock (addrAddress serverAddr)
-    traceMarkerIO "Clinet: sending message"
+    traceMarkerIO "Client: sending message"
     msgSender sock
     close sock-- }}}
 
@@ -54,7 +54,7 @@ msgSender sock = do
     before <- getCurrentTime
     _ <- send sock "."
     "." <- recv sock 1
-    traceMarkerIO "Clinet: got reply"
+    traceMarkerIO "Client: got reply"
     after <- getCurrentTime
     print $ showUS $ after `diffUTCTime` before-- }}}
 

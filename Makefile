@@ -1,5 +1,6 @@
 FILE=
 EVENTLOG=0
+N=2
 
 
 .PHONY: nix_files shell build run test clean tags
@@ -23,9 +24,9 @@ endif
 
 run:
 ifeq ("${EVENTLOG}","1")
-	dist/build/${FILE}/${FILE} +RTS -N2 -la
+	dist/build/${FILE}/${FILE} +RTS -N${N} -la
 else
-	dist/build/${FILE}/${FILE} +RTS -N2
+	dist/build/${FILE}/${FILE} +RTS -N${N}
 endif
 
 test:
